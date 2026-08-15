@@ -1,8 +1,8 @@
 {
-	"name": "biscuit-studios/woo-cover-processing-fee",
+	"name": "biscuit-studios/woo-donation-cover-processing-fee",
 	"description": "Checkout donation selector and grossed-up processing-fee opt-in for WooCommerce.",
 	"type": "wordpress-plugin",
-	"license": "proprietary",
+	"license": "GPL-2.0-or-later",
 	"require": {
 		"php": ">=8.2"
 	},
