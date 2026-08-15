@@ -1,0 +1,315 @@
+/**
+ * Settings screen — WooCommerce Analytics visual language.
+ * White cards on the WP admin gray, hairline border via box-shadow.
+ */
+
+.wcf-admin {
+	--wcf-bg: #f0f0f1;
+	--wcf-card-bg: #fff;
+	--wcf-text: #1e1e1e;
+	--wcf-text-body: #3c434a;
+	--wcf-text-muted: #757575;
+	--wcf-border: #e2e4e7;
+	--wcf-accent: #2271b1;
+
+	--wcf-card-radius: 4px;
+	--wcf-card-shadow: 0 0 0 1px rgb(0 0 0 / 10%);
+	--wcf-card-pad: 24px;
+	--wcf-card-hdr-pad: 16px 24px;
+	--wcf-card-gap: 24px;
+
+	--wcf-input-height: 44px;
+	--wcf-input-radius: 4px;
+	--wcf-input-border: 1px solid #c3c4c7;
+
+	max-width: 900px;
+	margin-right: 20px;
+	color: var(--wcf-text-body);
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+/* ------------------------------------------------------------------ Header */
+
+.wcf-page-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 24px;
+	background: var(--wcf-card-bg);
+	box-shadow: var(--wcf-card-shadow);
+	border-radius: var(--wcf-card-radius);
+	margin: 20px 0 var(--wcf-card-gap);
+}
+
+.wcf-page-header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--wcf-text);
+}
+
+/* ------------------------------------------------------------------- Cards */
+
+.wcf-card {
+	background: var(--wcf-card-bg);
+	border: 0;
+	border-radius: var(--wcf-card-radius);
+	box-shadow: var(--wcf-card-shadow);
+	margin: 0 0 var(--wcf-card-gap);
+}
+
+.wcf-card-header {
+	padding: var(--wcf-card-hdr-pad);
+	background: transparent;
+	border-bottom: 1px solid var(--wcf-border);
+	border-radius: var(--wcf-card-radius) var(--wcf-card-radius) 0 0;
+}
+
+.wcf-card-header h2 {
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--wcf-text);
+}
+
+.wcf-card-body {
+	padding: var(--wcf-card-pad);
+}
+
+/* ------------------------------------------------------------------ Fields */
+
+.wcf-field {
+	margin: 0 0 20px;
+}
+
+.wcf-card-body > .wcf-field:last-child,
+.wcf-field-row:last-child {
+	margin-bottom: 0;
+}
+
+.wcf-field > label {
+	display: block;
+	margin: 0 0 6px;
+	font-weight: 600;
+	color: var(--wcf-text);
+}
+
+/* height + border-box, never min-height — browser chrome inside time/number
+   inputs pushes min-height-only fields past the target size. */
+.wcf-field input[type='text'],
+.wcf-field input[type='number'],
+.wcf-field input[type='email'],
+.wcf-field select:not([multiple]) {
+	box-sizing: border-box;
+	width: 100%;
+	height: var(--wcf-input-height);
+	padding: 0 12px;
+	border: var(--wcf-input-border);
+	border-radius: var(--wcf-input-radius);
+	background: #fff;
+	color: var(--wcf-text);
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+/* Multi-selects are exempt from the 44px rule above — they size by `size`. */
+.wcf-field select[multiple].wcf-multiselect {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 6px;
+	border: var(--wcf-input-border);
+	border-radius: var(--wcf-input-radius);
+	background: #fff;
+	color: var(--wcf-text);
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.wcf-field select[multiple].wcf-multiselect option {
+	padding: 4px 6px;
+}
+
+.wcf-field textarea {
+	box-sizing: border-box;
+	width: 100%;
+	min-height: 80px;
+	padding: 12px;
+	border: var(--wcf-input-border);
+	border-radius: var(--wcf-input-radius);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.wcf-field label.wcf-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 400;
+	margin: 0;
+}
+
+.wcf-help {
+	margin: 6px 0 0;
+	color: var(--wcf-text-muted);
+	font-size: 12px;
+}
+
+.wcf-field-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	margin: 0 0 20px;
+}
+
+.wcf-field-row-4 {
+	grid-template-columns: repeat(4, 1fr);
+}
+
+.wcf-field-row .wcf-field {
+	margin: 0;
+}
+
+@media (max-width: 782px) {
+	.wcf-field-row,
+	.wcf-field-row-4 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Prefix/suffix affixes (%, currency) */
+
+.wcf-input-affix {
+	display: flex;
+	align-items: stretch;
+}
+
+.wcf-input-affix input {
+	border-radius: var(--wcf-input-radius) 0 0 var(--wcf-input-radius) !important;
+}
+
+.wcf-input-affix .wcf-affix-prefix + input {
+	border-radius: 0 var(--wcf-input-radius) var(--wcf-input-radius) 0 !important;
+}
+
+.wcf-affix {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	height: var(--wcf-input-height);
+	box-sizing: border-box;
+	padding: 0 10px;
+	background: #f0f0f0;
+	border: var(--wcf-input-border);
+	border-left: 0;
+	border-radius: 0 var(--wcf-input-radius) var(--wcf-input-radius) 0;
+	color: var(--wcf-text-muted);
+	font-weight: 600;
+}
+
+.wcf-affix-prefix {
+	border-left: var(--wcf-input-border);
+	border-right: 0;
+	border-radius: var(--wcf-input-radius) 0 0 var(--wcf-input-radius);
+}
+
+/* ---------------------------------------------------------------- Repeater */
+
+.wcf-repeater {
+	margin: 0 0 12px;
+}
+
+.wcf-repeater-row {
+	display: flex;
+	align-items: stretch;
+	gap: 0;
+	margin: 0 0 8px;
+	max-width: 320px;
+}
+
+.wcf-repeater-row .wcf-currency {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	box-sizing: border-box;
+	padding: 0 10px;
+	background: #f0f0f0;
+	border: var(--wcf-input-border);
+	border-right: 0;
+	border-radius: var(--wcf-input-radius) 0 0 var(--wcf-input-radius);
+	color: var(--wcf-text-muted);
+	font-weight: 600;
+}
+
+.wcf-repeater-row input[type='number'] {
+	border-radius: 0 !important;
+	flex: 1 1 auto;
+}
+
+.wcf-remove-row {
+	flex: 0 0 auto;
+	width: 44px;
+	height: var(--wcf-input-height);
+	background: #fff;
+	border: var(--wcf-input-border);
+	border-left: 0;
+	border-radius: 0 var(--wcf-input-radius) var(--wcf-input-radius) 0;
+	color: var(--wcf-text-muted);
+	font-size: 18px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+.wcf-remove-row:hover {
+	color: #d63638;
+	background: #fcf0f1;
+}
+
+.wcf-add-row {
+	height: 36px;
+}
+
+/* ---------------------------------------------------------------- Callout */
+
+.wcf-callout {
+	padding: 16px 20px;
+	margin: 0 0 20px;
+	background: #f6f7f7;
+	border-left: 4px solid var(--wcf-accent);
+	border-radius: 0 var(--wcf-card-radius) var(--wcf-card-radius) 0;
+}
+
+.wcf-callout strong {
+	display: block;
+	margin: 0 0 6px;
+	color: var(--wcf-text);
+}
+
+.wcf-callout p {
+	margin: 0 0 8px;
+	color: var(--wcf-text-body);
+}
+
+.wcf-callout p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------------------------------- Actions */
+
+.wcf-actions {
+	margin: 0 0 40px;
+}
+
+.wcf-actions .button-primary {
+	height: 40px;
+	padding: 0 20px;
+}
+
+/* The color picker's own button should not inherit our 44px input rule. */
+.wcf-admin .wp-picker-container .wp-color-result.button {
+	height: 34px;
+}

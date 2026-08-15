@@ -1,0 +1,212 @@
+/**
+ * Checkout box.
+ *
+ * Deliberately minimal and theme-deferential: sizing and typography inherit
+ * from the theme, and only the four configurable colors are asserted. The
+ * custom properties are set inline on .wcf-box by PHP.
+ */
+
+.wcf-box {
+	--wcf-accent: #3b6ea5;
+	--wcf-selected-bg: #3b6ea5;
+	--wcf-button-bg: #3b6ea5;
+	--wcf-button-text: #fff;
+
+	background-color: #fff;
+	box-shadow: 0 0 12px 0 rgb(0 0 0 / 10%);
+	padding: 20px;
+	margin-bottom: 40px;
+}
+
+.wcf-box.is-busy {
+	opacity: 0.6;
+	pointer-events: none;
+}
+
+/* --------------------------------------------------------------- Donation */
+
+.wcf-box .wcf-heading {
+	font-size: 1.25em;
+	font-weight: 600;
+	margin: 0;
+	margin-bottom: 24px;
+}
+
+.wcf-amounts {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+/* Selectors are scoped to .wcf-box throughout so theme button styles, which
+   are usually written as bare `button` or single-class rules, don't win. */
+.wcf-box .wcf-amount {
+	flex: 1 1 auto;
+	min-width: 90px;
+	min-height: 44px; /* touch target */
+	padding: 10px 16px;
+	background: transparent;
+	border: 2px solid var(--wcf-accent);
+	border-radius: 0;
+	color: var(--wcf-accent);
+	font-size: 1em;
+	font-weight: 700;
+	line-height: 1.2;
+	cursor: pointer;
+	transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Anything without .is-selected must return to the outlined state, including
+   while it still holds focus. A mouse click leaves :focus on the button but
+   NOT :focus-visible (which is keyboard-only), so without this the theme's
+   own `button:focus` fill persists after deselecting and reads as selected. */
+.wcf-box .wcf-amount:not(.is-selected),
+.wcf-box .wcf-amount:not(.is-selected):focus,
+.wcf-box .wcf-amount:not(.is-selected):active {
+	background: transparent;
+	border-color: var(--wcf-accent);
+	color: var(--wcf-accent);
+}
+
+/* Hover must NOT mimic the selected state — otherwise every button looks
+   picked as the pointer passes over it. Unselected hover is a light tint.
+   Declared after the reset above so it wins at equal specificity. */
+.wcf-box .wcf-amount:not(.is-selected):hover,
+.wcf-box .wcf-amount:not(.is-selected):focus-visible {
+	background: #eef2f6; /* fallback for older browsers */
+	background: color-mix(in srgb, var(--wcf-selected-bg) 12%, #fff);
+	color: var(--wcf-accent);
+}
+
+/* The chosen amount stays solid — including while hovered, and after the
+   checkout fragment re-renders. */
+.wcf-box .wcf-amount.is-selected,
+.wcf-box .wcf-amount.is-selected:hover,
+.wcf-box .wcf-amount.is-selected:focus,
+.wcf-box .wcf-amount.is-selected:focus-visible {
+	background: var(--wcf-selected-bg);
+	border-color: var(--wcf-selected-bg);
+	color: var(--wcf-button-text);
+}
+
+/* wc_price() wraps output in .woocommerce-Price-amount — inherit the button color. */
+.wcf-box .wcf-amount .woocommerce-Price-amount,
+.wcf-box .wcf-amount .woocommerce-Price-currencySymbol {
+	color: inherit;
+}
+
+/* ------------------------------------------------------------------ Other */
+
+.wcf-other-panel {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	align-items: stretch;
+	margin-top: 14px;
+}
+
+.wcf-other-panel[hidden] {
+	display: none;
+}
+
+.wcf-other-input {
+	flex: 1 1 160px;
+	min-height: 44px;
+	box-sizing: border-box;
+	padding: 10px 12px;
+}
+
+.wcf-box .wcf-apply {
+	min-height: 44px;
+	padding: 10px 22px;
+	background: var(--wcf-button-bg);
+	border: 2px solid var(--wcf-button-bg);
+	border-radius: 0;
+	color: var(--wcf-button-text);
+	font-size: 1em;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	cursor: pointer;
+}
+
+.wcf-box .wcf-apply:hover,
+.wcf-box .wcf-apply:focus-visible {
+	background: var(--wcf-button-bg);
+	color: var(--wcf-button-text);
+	filter: brightness(0.92);
+}
+
+.wcf-error {
+	margin: 12px 0 0;
+	color: #b32d2e;
+	font-size: 0.9em;
+}
+
+.wcf-error[hidden] {
+	display: none;
+}
+
+/* -------------------------------------------------------------------- Fee */
+
+.wcf-fee {
+	margin-top: 22px;
+	padding-top: 20px;
+	border-top: 1px solid rgb(0 0 0 / 10%);
+}
+
+/* Only applies when the donation section above is rendered. */
+.wcf-box > .wcf-fee:first-child {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: 0;
+}
+
+.wcf-fee-row {
+	margin: 0;
+	padding: 0;
+}
+
+/* Themes commonly bold checkout .form-row labels — override so the sentence
+   reads as body copy, not a field label. */
+.wcf-box .wcf-fee label,
+.wcf-box .wcf-fee-message {
+	font-weight: 400;
+}
+
+.wcf-box .wcf-fee label {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	cursor: pointer;
+	line-height: 1.5;
+}
+
+.wcf-box .wcf-fee input[type='checkbox'] {
+	flex: 0 0 auto;
+	margin-top: 0.25em;
+}
+
+.wcf-box .wcf-fee-message a {
+	text-decoration: underline;
+}
+
+/* ----------------------------------------------------------------- Mobile */
+
+/* Scoped to match the base rules above — a bare `.wcf-amount` here would lose
+   to `.wcf-box .wcf-amount`'s `flex` shorthand on specificity, media query or
+   not, and the two-up layout would never apply. */
+@media (max-width: 600px) {
+	.wcf-box .wcf-amounts {
+		gap: 8px;
+	}
+
+	.wcf-box .wcf-amount {
+		flex-basis: calc(50% - 4px);
+		min-width: 0;
+	}
+
+	.wcf-box .wcf-apply {
+		flex: 1 1 100%;
+	}
+}
