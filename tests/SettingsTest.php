@@ -33,7 +33,7 @@ class SettingsTest extends TestCase {
 		$this->assertEqualsWithDelta( $base, $net, 0.01, "Store did not net the base on {$base}" );
 	}
 
-	public function baseAmounts() {
+	public static function baseAmounts(): array {
 		return array( array( 10 ), array( 25 ), array( 100 ), array( 250.50 ), array( 1000 ), array( 5000 ) );
 	}
 
