@@ -4,7 +4,7 @@ Tags: woocommerce, checkout, donation, fees
 Requires at least: 6.3
 Tested up to: 7.0
 Requires PHP: 8.2
-Stable tag: 2.2.1
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,5 +26,5 @@ as-is, with no support. Forks welcome.
 
 == Changelog ==
 
-= 2.2.1 =
+= 2.3.0 =
 See https://github.com/biscuitstudios/woo-donation-cover-processing-fee/releases
