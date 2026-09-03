@@ -3,7 +3,7 @@
  * Plugin Name:       Woo Checkout Donation + Fee
  * Plugin URI:        https://github.com/biscuitstudios/woo-donation-cover-processing-fee
  * Description:       Adds a donation selector and a voluntary "cover payment processing" checkbox to the checkout. The processing fee is grossed up so the full amount, including any donation, arrives whole. Classic (shortcode) checkout only.
- * Version:           2.3.0
+ * Version:           2.4.0
  * Requires at least: 6.3
  * Requires PHP:      8.2
  * Requires Plugins:  woocommerce
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // no direct access
  * can be told apart by version. If they ever DO need to coexist, both the
  * remaining constants and the class names must be namespaced first.
  */
-define( 'WOO_DONATION_COVER_FEE_VERSION', '2.3.0' );
+define( 'WOO_DONATION_COVER_FEE_VERSION', '2.4.0' );
 define( 'WOO_COVER_FEE_FILE', __FILE__ );
 define( 'WOO_COVER_FEE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOO_COVER_FEE_URL', plugin_dir_url( __FILE__ ) );
@@ -40,6 +40,20 @@ define( 'WOO_COVER_FEE_BASENAME', plugin_basename( __FILE__ ) );
 require_once WOO_COVER_FEE_PATH . 'includes/class-woo-cover-fee-settings.php';
 require_once WOO_COVER_FEE_PATH . 'includes/class-woo-cover-fee-checkout.php';
 require_once WOO_COVER_FEE_PATH . 'includes/class-woo-cover-fee-admin.php';
+require_once WOO_COVER_FEE_PATH . 'includes/class-woo-donation-cover-fee-updater.php';
+
+/**
+ * Updates come from the repo's GitHub Releases. Deliberately outside the
+ * WooCommerce gate below: a site whose WooCommerce is deactivated still needs
+ * to be offered plugin updates, and update checks also run under cron, which
+ * is not an admin request.
+ *
+ * The class name carries the Donation prefix on purpose. This plugin and
+ * woo-cover-processing-fee already share WOO_COVER_FEE_PATH and the
+ * WOO_Cover_Fee_Settings / WOO_Cover_Fee_Admin class names, so they can never
+ * both be active. Reusing one more name would deepen that, not reveal it.
+ */
+( new WOO_Donation_Cover_Fee_Updater( __FILE__ ) )->init();
 
 /**
  * HPOS compatibility. Order meta is written through the CRUD layer, so this
