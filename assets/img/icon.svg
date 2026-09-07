@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Woo Donation Cover Processing Fee">
+	<title>Woo Donation Cover Processing Fee</title>
+	<!--
+		Tabler Icons "credit-card", MIT licensed (https://tabler.io/icons).
+		Drawn on a 24x24 grid, scaled 7x and centred on a 256 canvas, which
+		keeps the original stroke weight ratio (2/24 of the glyph box).
+
+		The source icon uses stroke="currentColor". That is no use here: core
+		renders a plugin icon as <img src="...">, so the SVG is its own
+		document with nothing to inherit a colour from, and currentColor would
+		fall back to black. The stroke is set explicitly instead.
+
+		The tile and the glyph transform are identical across all four Biscuit
+		plugins, so the icons read as one set in the plugins list.
+	-->
+	<rect width="256" height="256" rx="56" fill="#ebebeb" />
+	<g transform="translate(44 44) scale(7)"
+	   fill="none"
+	   stroke="#000000"
+	   stroke-width="2"
+	   stroke-linecap="round"
+	   stroke-linejoin="round">
+		<path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8" />
+		<path d="M3 10l18 0" />
+		<path d="M7 15l.01 0" />
+		<path d="M11 15l2 0" />
+	</g>
+</svg>

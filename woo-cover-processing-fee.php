@@ -3,7 +3,7 @@
  * Plugin Name:       Woo Checkout Donation + Fee
  * Plugin URI:        https://github.com/biscuitstudios/woo-donation-cover-processing-fee
  * Description:       Adds a donation selector and a voluntary "cover payment processing" checkbox to the checkout. The processing fee is grossed up so the full amount, including any donation, arrives whole. Classic (shortcode) checkout only.
- * Version:           2.4.0
+ * Version:           2.5.0
  * Requires at least: 6.3
  * Requires PHP:      8.2
  * Requires Plugins:  woocommerce
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // no direct access
  * can be told apart by version. If they ever DO need to coexist, both the
  * remaining constants and the class names must be namespaced first.
  */
-define( 'WOO_DONATION_COVER_FEE_VERSION', '2.4.0' );
+define( 'WOO_DONATION_COVER_FEE_VERSION', '2.5.0' );
 define( 'WOO_COVER_FEE_FILE', __FILE__ );
 define( 'WOO_COVER_FEE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOO_COVER_FEE_URL', plugin_dir_url( __FILE__ ) );
