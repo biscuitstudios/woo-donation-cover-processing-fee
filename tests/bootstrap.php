@@ -84,4 +84,22 @@ function _test_reset_options() {
 
 require_once __DIR__ . '/../includes/class-woo-cover-fee-settings.php';
 
+/**
+ * Stand-in for WooCommerce's WC_Email so the donation receipt class can be
+ * declared without loading WooCommerce.
+ *
+ * It is an empty shell and it is NOT exercised. Only the pure static helpers
+ * on WOO_Donation_Cover_Fee_Email are tested, and those never touch $this,
+ * the parent, or any WordPress function. Instantiating the email class here
+ * would fatal (the constructor calls parent::__construct(), which this stub
+ * does not have) and that is deliberate: it keeps the tests honest about what
+ * they cover. The trigger, the templates and the settings screen are only
+ * exercised on a real site.
+ */
+if ( ! class_exists( 'WC_Email' ) ) {
+	class WC_Email {}
+}
+
+require_once __DIR__ . '/../includes/class-woo-donation-cover-fee-email.php';
+
 _test_reset_options();

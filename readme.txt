@@ -4,7 +4,7 @@ Tags: woocommerce, checkout, donation, fees
 Requires at least: 6.3
 Tested up to: 7.0
 Requires PHP: 8.2
-Stable tag: 2.5.0
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,6 +25,18 @@ as-is, with no support. Forks welcome.
 3. Activate.
 
 == Changelog ==
+
+= 2.6.0 =
+* New: an internal donation receipt email. When an order includes a donation it
+  can send a receipt showing the donation and none of the products bought,
+  which suits a finance or fundraising inbox that does not need the basket.
+* It is a normal WooCommerce email, so it is configured at WooCommerce >
+  Settings > Emails > Donation receipt (internal), with the usual enable
+  switch, recipient list, subject, heading and HTML or plain text choice.
+* Ships disabled with no recipient. A site that does not want it needs to do
+  nothing at all.
+* Refunds are not covered. WooCommerce's own Refunded order email handles the
+  customer side.
 
 = 2.5.0 =
 * New: the plugin now has its own icon on the Plugins and Updates screens.

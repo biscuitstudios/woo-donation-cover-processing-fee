@@ -21,6 +21,26 @@ total, donation included, rather than that total minus fees.
 
 Both are off by default. Nothing changes until the customer chooses.
 
+## Donation receipt email
+
+Optional, and disabled when you install it.
+
+When an order includes a donation, the plugin can send an internal receipt that
+shows **the donation and not the products bought**. It suits a finance or
+fundraising inbox that needs to know a gift came in without seeing the basket.
+
+It is a normal WooCommerce email, so there is nothing to set up on the plugin's
+own screen. Find it at **WooCommerce → Settings → Emails → Donation receipt
+(internal)**, tick the enable box and enter one or more recipients. Subject,
+heading and the HTML or plain text choice work as they do for every other
+WooCommerce email, and the templates can be overridden from a theme at
+`yourtheme/woocommerce/emails/donation-receipt.php`.
+
+Nothing sends until both the enable box is ticked and a valid recipient is set.
+
+Refunds are not covered. WooCommerce's own Refunded order email handles the
+customer side.
+
 ## Requirements
 
 - WordPress 6.3 or later

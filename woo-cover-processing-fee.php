@@ -3,7 +3,7 @@
  * Plugin Name:       Woo Checkout Donation + Fee
  * Plugin URI:        https://github.com/biscuitstudios/woo-donation-cover-processing-fee
  * Description:       Adds a donation selector and a voluntary "cover payment processing" checkbox to the checkout. The processing fee is grossed up so the full amount, including any donation, arrives whole. Classic (shortcode) checkout only.
- * Version:           2.5.0
+ * Version:           2.6.0
  * Requires at least: 6.3
  * Requires PHP:      8.2
  * Requires Plugins:  woocommerce
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // no direct access
  * can be told apart by version. If they ever DO need to coexist, both the
  * remaining constants and the class names must be namespaced first.
  */
-define( 'WOO_DONATION_COVER_FEE_VERSION', '2.5.0' );
+define( 'WOO_DONATION_COVER_FEE_VERSION', '2.6.0' );
 define( 'WOO_COVER_FEE_FILE', __FILE__ );
 define( 'WOO_COVER_FEE_PATH', plugin_dir_path( __FILE__ ) );
 define( 'WOO_COVER_FEE_URL', plugin_dir_url( __FILE__ ) );
@@ -87,4 +87,24 @@ add_action( 'plugins_loaded', function () {
 	if ( is_admin() ) {
 		( new WOO_Cover_Fee_Admin() )->init();
 	}
+} );
+
+/**
+ * Internal donation receipt email.
+ *
+ * Registered through WooCommerce's own email registry, so it appears under
+ * WooCommerce > Settings > Emails with an enable switch and a recipient list
+ * like any core email. It ships disabled with no recipient.
+ *
+ * The require is inside the filter on purpose. WC_Email, the parent class, is
+ * not loaded at plugins_loaded. WooCommerce loads it just before firing this
+ * filter, so requiring the file any earlier is a fatal "Class WC_Email not
+ * found".
+ */
+add_filter( 'woocommerce_email_classes', function ( $emails ) {
+	require_once WOO_COVER_FEE_PATH . 'includes/class-woo-donation-cover-fee-email.php';
+
+	$emails['WOO_Donation_Cover_Fee_Email'] = new WOO_Donation_Cover_Fee_Email();
+
+	return $emails;
 } );

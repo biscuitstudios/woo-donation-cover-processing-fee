@@ -328,6 +328,34 @@ class WOO_Cover_Fee_Admin {
 					</div>
 				</div>
 
+				<!-- --------------------------------------- Receipt pointer -->
+				<?php
+				/*
+				 * Not a setting. The donation receipt is a WooCommerce email,
+				 * so it is configured on WooCommerce's email screen with every
+				 * other one. This card exists only so nobody hunts for it here.
+				 */
+				$email_url = admin_url( 'admin.php?page=wc-settings&tab=email&section=woo_donation_cover_fee_receipt' );
+				?>
+				<div class="wcf-card">
+					<div class="wcf-card-header">
+						<h2><?php esc_html_e( 'Donation receipt email', 'woo-donation-cover-processing-fee' ); ?></h2>
+					</div>
+					<div class="wcf-card-body">
+						<div class="wcf-callout">
+							<strong><?php esc_html_e( 'Configured under WooCommerce emails', 'woo-donation-cover-processing-fee' ); ?></strong>
+							<p>
+								<?php esc_html_e( 'An internal receipt can be sent whenever an order includes a donation. It shows the donation and not the products bought, so it suits a finance or fundraising inbox. It is off until someone turns it on and enters a recipient.', 'woo-donation-cover-processing-fee' ); ?>
+							</p>
+							<p>
+								<a href="<?php echo esc_url( $email_url ); ?>">
+									<?php esc_html_e( 'Open the Donation receipt email settings', 'woo-donation-cover-processing-fee' ); ?>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+
 				<!-- ------------------------------------------------- Colors -->
 				<div class="wcf-card">
 					<div class="wcf-card-header">
