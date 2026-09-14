@@ -103,3 +103,35 @@ if ( ! class_exists( 'WC_Email' ) ) {
 require_once __DIR__ . '/../includes/class-woo-donation-cover-fee-email.php';
 
 _test_reset_options();
+
+/* ------------------------------------------- Changelog renderer (updater) */
+
+if ( ! defined( 'HOUR_IN_SECONDS' ) ) {
+	define( 'HOUR_IN_SECONDS', 3600 );
+}
+
+if ( ! function_exists( 'esc_html' ) ) {
+	function esc_html( $str ) {
+		return htmlspecialchars( (string) $str, ENT_QUOTES, 'UTF-8' );
+	}
+}
+
+if ( ! function_exists( 'esc_html__' ) ) {
+	function esc_html__( $text, $domain = '' ) {
+		return esc_html( $text );
+	}
+}
+
+/**
+ * Close enough to the real esc_url() for the changelog renderer: it rejects a
+ * scheme it does not recognise and encodes ampersands. NOT a reimplementation,
+ * so a passing suite says nothing about the real function's stricter handling.
+ */
+if ( ! function_exists( 'esc_url' ) ) {
+	function esc_url( $url ) {
+		$url = trim( (string) $url );
+		return preg_match( '#^https?://#', $url ) ? str_replace( '&', '&#038;', $url ) : '';
+	}
+}
+
+require_once __DIR__ . '/../includes/class-woo-donation-cover-fee-updater.php';
