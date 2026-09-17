@@ -135,3 +135,43 @@ if ( ! function_exists( 'esc_url' ) ) {
 }
 
 require_once __DIR__ . '/../includes/class-woo-donation-cover-fee-updater.php';
+
+/* ------------------------------------ Stubs for the updater's HTTP and dates */
+
+// The response body is whatever a test put in $GLOBALS['_test_http']. Nothing
+// here reaches the network.
+if ( ! function_exists( 'wp_remote_get' ) ) {
+	function wp_remote_get( $url, $args = array() ) {
+		$GLOBALS['_test_http_url'] = $url;
+		return array(
+			'code' => $GLOBALS['_test_http_code'] ?? 200,
+			'body' => $GLOBALS['_test_http'] ?? '',
+		);
+	}
+}
+if ( ! function_exists( 'wp_remote_retrieve_response_code' ) ) {
+	function wp_remote_retrieve_response_code( $r ) { return $r['code']; }
+}
+if ( ! function_exists( 'wp_remote_retrieve_body' ) ) {
+	function wp_remote_retrieve_body( $r ) { return $r['body']; }
+}
+if ( ! function_exists( 'is_wp_error' ) ) {
+	function is_wp_error( $thing ) { return false; }
+}
+if ( ! function_exists( 'home_url' ) ) {
+	function home_url( $path = '' ) { return 'https://example.test' . $path; }
+}
+if ( ! function_exists( 'get_bloginfo' ) ) {
+	function get_bloginfo( $what = '' ) { return '7.1'; }
+}
+if ( ! function_exists( 'plugin_basename' ) ) {
+	function plugin_basename( $file ) { return basename( dirname( $file ) ) . '/' . basename( $file ); }
+}
+
+// Fixed to UTC so a heading's date does not depend on the machine running the
+// suite. The real wp_date() uses the site's timezone.
+if ( ! function_exists( 'wp_date' ) ) {
+	function wp_date( $format, $timestamp = null, $timezone = null ) {
+		return gmdate( $format, $timestamp ?? time() );
+	}
+}
