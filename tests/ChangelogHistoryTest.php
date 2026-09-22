@@ -42,7 +42,8 @@ final class ChangelogHistoryTest extends TestCase {
 				'assets'       => [
 					[
 						'name'                 => 'woo-donation-cover-processing-fee-v' . ltrim( $tag, 'v' ) . '.zip',
-						'browser_download_url' => 'https://example.test/' . $tag . '.zip',
+						'browser_download_url' => 'https://github.com/biscuitstudios/woo-donation-cover-processing-fee/releases/download/'
+							. $tag . '/woo-donation-cover-processing-fee-v' . ltrim( $tag, 'v' ) . '.zip',
 					],
 				],
 			],
@@ -65,7 +66,7 @@ final class ChangelogHistoryTest extends TestCase {
 		] );
 
 		$this->assertSame( '2.7.0', $release['version'] );
-		$this->assertSame( 'https://example.test/v2.7.0.zip', $release['package'] );
+		$this->assertSame( 'https://github.com/biscuitstudios/woo-donation-cover-processing-fee/releases/download/v2.7.0/woo-donation-cover-processing-fee-v2.7.0.zip', $release['package'] );
 	}
 
 	public function test_drafts_and_prereleases_are_skipped(): void {
